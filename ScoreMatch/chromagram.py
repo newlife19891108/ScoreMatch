@@ -1,8 +1,12 @@
 import librosa
 import wave
-def getChromagram(path):
+import numpy as np
+def getChromagramLibrosa(path):
 	y, fs = librosa.load	(path)
 	return librosa.feature.chroma_stft(y=y, fs=fs)
+def getChromagramFromCSV(path):
+	arr=np.loadtxt(path,delimiter=",")
+	chromagram=arr[:,1:]
+	return chromagram
 
 
-getChromagram('./audio_samples/melody7.wav')
