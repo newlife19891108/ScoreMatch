@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import sys
 import json
 import urllib
@@ -7,8 +8,6 @@ import urlparse
 from score import *
 musescore_base = 'http://api.musescore.com/services/rest/'
 consumer_key = 'KPAHk3xHbestkW8WsQ3ypwoXSnMVxE6z'
-
-
 
 
 def create_score(score_id):
@@ -36,4 +35,3 @@ def create_score(score_id):
         mp3,
         midi,
         )
-

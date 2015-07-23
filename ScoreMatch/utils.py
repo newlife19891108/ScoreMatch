@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import numpy as np
 import mido as md
 import matplotlib.pyplot as plt
@@ -7,6 +8,7 @@ import urllib
 import os
 import subprocess
 import sys
+
 
 def get_chromagram_from_audio(file_name, csv_out=''):
     command = 'sonic-annotator -t hpcp.n3 ' + file_name \
@@ -17,14 +19,16 @@ def get_chromagram_from_audio(file_name, csv_out=''):
     result = subprocess.check_output(command, shell=True)
     first_comma = result.find(',')
 
-    array =  np.fromstring(result[first_comma+1:],sep=',')
+    array = np.fromstring(result[first_comma + 1:], sep=',')
     columns = 13
-    rows = len(array)/columns
-    out = np.reshape(array,(rows,columns))
-    if csv_out!='':
+    rows = len(array) / columns
+    out = np.reshape(array, (rows, columns))
+    if csv_out != '':
         np.savetxt(csv_out, out, delimiter=',', fmt='%.9f')
-    return out[:,1:]
-def get_chromagram_from_midi(file_name, csv_out=""):
+    return out[:, 1:]
+
+
+def get_chromagram_from_midi(file_name, csv_out=''):
     mid = md.MidiFile(file_name)
     times = np.array([m.time for m in mid])
 
