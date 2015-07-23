@@ -9,25 +9,12 @@ musescore_base = 'http://api.musescore.com/services/rest/'
 consumer_key = 'KPAHk3xHbestkW8WsQ3ypwoXSnMVxE6z'
 
 
-def parse_score(data):
-    metadata = data['metadata']
-    title = metadata['title']
-    composer = metadata['composer']
-    subtitle = metadata['subtitle']
-    return title + ' ' + composer
-
-
-def get_search_query_for_score(score_id):
-    url = musescore_base + 'score/' + score_id \
-        + '.json?oauth_consumer_key=' + consumer_key
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
-    return parse_score(data)
 
 
 def create_score(score_id):
     url = musescore_base + 'score/' + score_id \
         + '.json?oauth_consumer_key=' + consumer_key
+    print url
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     id = score_id
@@ -38,9 +25,10 @@ def create_score(score_id):
     subtitle = metadata['subtitle']
     mp3 = 'http://static.musescore.com/' + id + '/' + secret \
         + '/score.mp3'
+
     midi = 'http://static.musescore.com/' + id + '/' + secret \
         + '/score.mid'
-    return score(
+    return Score(
         id,
         title,
         subtitle,
@@ -48,3 +36,4 @@ def create_score(score_id):
         mp3,
         midi,
         )
+
