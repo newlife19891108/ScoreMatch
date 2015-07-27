@@ -3,7 +3,6 @@
 
 import urllib
 from analyzable import *
-from utils import *
 
 
 class EchonestSong(Analyzable):
@@ -25,3 +24,11 @@ class EchonestSong(Analyzable):
         chromagram = get_chromagram_from_audio(audio_file_path)
         remove_file(audio_file_path)
         return chromagram
+    def set_features(self,tempo,duration,timesig,key,chroma):
+    	self.tempo = tempo
+    	self.duration = duration
+    	self.timesig = timesig
+    	self.key = key
+        self.chroma = chroma
+    def get_echonest_features_for_url(self):
+        return self.chroma,self.timesig,self.key,self.duration,self.tempo

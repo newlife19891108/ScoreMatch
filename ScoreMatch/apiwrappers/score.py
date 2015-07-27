@@ -4,7 +4,7 @@
 from analyzable import *
 import os
 from utils import *
-
+from echonest import get_echonest_features_for_url
 
 class Score(Analyzable):
 
@@ -32,6 +32,7 @@ class Score(Analyzable):
         chromagram = get_chromagram_from_midi(midi_file_path)
         remove_file(midi_file_path)
         return chromagram
-
+    def get_echonest_analysis(self):
+        return get_echonest_features_for_url(self.mp3)
     def get_search_query_for_score(self):
         return self.title + ' ' + self.composer

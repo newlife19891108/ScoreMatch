@@ -4,7 +4,7 @@
 import urllib
 from analyzable import *
 from utils import *
-
+from echonest import *
 
 class SpotifyTrack(Analyzable):
 
@@ -26,3 +26,5 @@ class SpotifyTrack(Analyzable):
         chromagram = get_chromagram_from_audio(audio_file_path)
         remove_file(audio_file_path)
         return chromagram
+    def get_echonest_analysis(self):
+        return get_echonestsong_by_spotifyid(self.id).get_echonest_features_for_url()
