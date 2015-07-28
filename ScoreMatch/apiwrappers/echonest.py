@@ -31,12 +31,22 @@ def search_echonest(song_artist, song_name):
             songresult.append(e)
   
     return songresult
+def extract_artist_from_text(text):
+    url = echonest_base+'artist/extract?api_key='+api_key+"&format=json&text="+text
+    print url.encode('utf-8')
+    response = urllib.urlopen(url.encode('utf-8'))
+    data = json.loads(response.read())
+    artists  = data['response']['artists']
+    result = []
+    for artist in artists:
+        result.append(artist['name'])
+    return result
 def get_echonest_features_for_file(audio_file):
     pytrack = track.track_from_filename(audio_file)
     
     chroma = parse_echonest_analysisurl(pytrack.analysis_url)
     return chroma,pytrack.time_signature,pytrack.key,pytrack.duration,pytrack.tempo
-def get_echonest_features_for_file(url):
+def get_echonest_features_for_url(url):
     pytrack = track.track_from_url(url)
     
     chroma = parse_echonest_analysisurl(pytrack.analysis_url)
@@ -85,9 +95,10 @@ def get_echonestsong_by_spotifyid(spotify_id):
     return e
 
 api_key = 'KAPGNMBNAIKKXKWG7'
-
-config.ECHO_NEST_API_KEY = api_key
 echonest_base = 'http://developer.echonest.com/api/v4/'
-search_echonest('radiohead', 'karma police')
-#get_echonestsong_by_spotifyid('4C5YAL1hwwospGYk0SzvrJ')3
-get_echonest_features_for_file("TeVasMilonga.wav")
+
+if __name__ == "__main__":
+    config.ECHO_NEST_API_KEY = api_key
+    search_echonest('radiohead', 'karma police')
+    get_echonestsong_by_spotifyid('4C5YAL1hwwospGYk0SzvrJ')
+    get_echonest_features_for_file("TeVasMilonga.wav")

@@ -14,3 +14,6 @@ class Analyzable(object):
     @abc.abstractmethod
     def get_chromagram():
         return
+    @abc.abstractmethod
+    def get_echonest_analysis():
+        return

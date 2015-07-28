@@ -5,7 +5,7 @@ from analyzable import *
 import os
 from utils import *
 from echonest import get_echonest_features_for_url
-
+from echonest import extract_artist_from_text
 class Score(Analyzable):
 
     def __init__(
@@ -36,3 +36,6 @@ class Score(Analyzable):
         return get_echonest_features_for_url(self.mp3)
     def get_search_query_for_score(self):
         return self.title + ' ' + self.composer
+    def get_artist_from_echonest(self):
+        query = self.title+" "+self.subtitle+" "+self.composer
+        return extract_artist_from_text(query.lower())

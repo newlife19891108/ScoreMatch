@@ -11,8 +11,7 @@ consumer_key = 'KPAHk3xHbestkW8WsQ3ypwoXSnMVxE6z'
 
 
 def create_score(score_id):
-    url = musescore_base + 'score/' + score_id \
-        + '.json?oauth_consumer_key=' + consumer_key
+    url = musescore_base + 'score/' + score_id  + '.json?oauth_consumer_key=' + consumer_key
     print url
     response = urllib.urlopen(url)
     data = json.loads(response.read())

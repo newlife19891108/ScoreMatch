@@ -9,7 +9,6 @@ import urllib
 import urlparse
 from spotifytrack import *
 spotify_base = 'https://api.spotify.com/v1/'
-echonest_base = 'http://developer.echonest.com/api/v4/'
 
 
 def parse_spotify_search(data):
@@ -39,6 +38,7 @@ def create_spotify_track(id):
     url = spotify_base + 'tracks/'+id
     response = urllib.urlopen(url)
     data = json.loads(response.read())
+    
     return parse_spotify_track(data)
 def query(song_name, artist_name='', type='spotify'):
     if type == 'spotify':

@@ -30,5 +30,6 @@ class EchonestSong(Analyzable):
     	self.timesig = timesig
     	self.key = key
         self.chroma = chroma
-    def get_echonest_features_for_url(self):
+    def get_echonest_analysis(self):
+        
         return self.chroma,self.timesig,self.key,self.duration,self.tempo
