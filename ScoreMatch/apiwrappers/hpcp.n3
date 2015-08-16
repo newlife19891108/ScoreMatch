@@ -20,7 +20,7 @@
     ] ;
     vamp:parameter_binding [
         vamp:parameter [ vamp:identifier "nbins" ] ;
-        vamp:value "12"^^xsd:float ;
+        vamp:value "120"^^xsd:float ;
     ] ;
     vamp:parameter_binding [
         vamp:parameter [ vamp:identifier "non_linear" ] ;

@@ -1,33 +1,39 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys
-import json
-import urllib
-import urlparse
 from score import *
-musescore_base = 'http://api.musescore.com/services/rest/'
-consumer_key = 'KPAHk3xHbestkW8WsQ3ypwoXSnMVxE6z'
+from connectionmanager import ConnectionManager
+from connectionsettings import ConnectionSettings
 
-
+"""
+    This module provides wrappers for required muse score api functions
+"""
 def create_score(score_id):
-    url = musescore_base + 'score/' + score_id  + '.json?oauth_consumer_key=' + consumer_key
-    print url
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
-    id = score_id
+    """
+        create a score for given MuseScore score id
+
+        Args:
+            score_id: MuseScore id
+
+        Returns:
+            :class:`.Score` instance
+    """
+    cs = ConnectionSettings()
+    base_url = cs.musescore_base + 'score/' + score_id + '.json?'
+    params = {'oauth_consumer_key': cs.musescore_key}
+    data = ConnectionManager().get_data(base_url,params)
     secret = data['secret']
     metadata = data['metadata']
     title = metadata['title']
     composer = metadata['composer']
     subtitle = metadata['subtitle']
-    mp3 = 'http://static.musescore.com/' + id + '/' + secret \
+    mp3 = 'http://static.musescore.com/' + score_id + '/' + secret \
         + '/score.mp3'
 
-    midi = 'http://static.musescore.com/' + id + '/' + secret \
+    midi = 'http://static.musescore.com/' + score_id + '/' + secret \
         + '/score.mid'
     return Score(
-        id,
+        score_id,
         title,
         subtitle,
         composer,

@@ -3,33 +3,42 @@
 
 import urllib
 from analyzable import *
-
+import utils
 
 class EchonestSong(Analyzable):
+    """Class representing an Echonest Song (in very basic way).
 
+    Attributes:
+        id: id of the Echonest Song.
+
+        name: name of the Echonest Song.
+
+        preview_url: preview_url of the Echonest Song.
+        
+        features: :class:`.EchonestFeatures` of EchonestSong.
+    """
     def __init__(
         self,
         id,
         name,
         preview_url,
         ):
+
         Analyzable.__init__(self, id)
         self.preview_url = preview_url
-        self.name = name
+        self.name = name.encode('utf-8')
+        self.type = 'echonest'
+
     def get_chromagram(self):
 
         directory = os.path.dirname(os.path.abspath(__file__))
         audio_file_path = directory + '/' + self.id + '.mp3'
-        download_file(self.preview_url, audio_file_path)
+        print "score is being downloaded"
+        utils.download_file(self.preview_url, audio_file_path)
+        print "file downloaded"
         chromagram = get_chromagram_from_audio(audio_file_path)
-        remove_file(audio_file_path)
+        utils.remove_file(audio_file_path)
         return chromagram
-    def set_features(self,tempo,duration,timesig,key,chroma):
-    	self.tempo = tempo
-    	self.duration = duration
-    	self.timesig = timesig
-    	self.key = key
-        self.chroma = chroma
-    def get_echonest_analysis(self):
-        
-        return self.chroma,self.timesig,self.key,self.duration,self.tempo
+
+    def set_features(self, features):
+        self.features = features
