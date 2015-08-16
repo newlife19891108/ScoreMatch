@@ -6,6 +6,7 @@
     vamp:plugin <file:///Library/Audio/Plug-Ins/Vamp/vamp-hpcp-mtg#MTG-HPCP> ;
     vamp:step_size "16384"^^xsd:int ; 
     vamp:block_size "16384"^^xsd:int ; 
+    vamp:sample_rate "48000"^^xsd:int ;
     vamp:parameter_binding [
         vamp:parameter [ vamp:identifier "HF" ] ;
         vamp:value "5000"^^xsd:float ;
