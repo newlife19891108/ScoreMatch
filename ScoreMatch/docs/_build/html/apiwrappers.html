@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>apiwrappers Package &mdash; Score Matcher 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Score Matcher 1 documentation" href="index.html" />
+    <link rel="up" title="Project Packages" href="packages.html" />
+    <link rel="next" title="dtwmatcher Package" href="dtwmatcher.html" />
+    <link rel="prev" title="Project Packages" href="packages.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dtwmatcher.html" title="dtwmatcher Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="packages.html" title="Project Packages"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Score Matcher 1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="packages.html" accesskey="U">Project Packages</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="apiwrappers-package">
+<h1>apiwrappers Package<a class="headerlink" href="#apiwrappers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-apiwrappers.analyzable">
+<span id="analyzable-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">analyzable</span></code> Module<a class="headerlink" href="#module-apiwrappers.analyzable" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apiwrappers.analyzable.Analyzable">
+<em class="property">class </em><code class="descclassname">apiwrappers.analyzable.</code><code class="descname">Analyzable</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.analyzable.Analyzable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This is an abstracted class for other audio related instances.</p>
+<p>The subclasses of this have to have a function which returns a chromagram.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd>id: id of the analyzable.Can be spotify,echonest or musescore id depending on the subclass inheriting it.</dd>
+</dl>
+<dl class="method">
+<dt id="apiwrappers.analyzable.Analyzable.get_chromagram">
+<code class="descname">get_chromagram</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.analyzable.Analyzable.get_chromagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has to return a chromagram. This is what characterizes analyzable</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.connectionsettings">
+<span id="connectionsettings-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">connectionsettings</span></code> Module<a class="headerlink" href="#module-apiwrappers.connectionsettings" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apiwrappers.connectionsettings.ConnectionSettings">
+<em class="property">class </em><code class="descclassname">apiwrappers.connectionsettings.</code><code class="descname">ConnectionSettings</code><a class="headerlink" href="#apiwrappers.connectionsettings.ConnectionSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Provides connection configurations for echonest and spotify apis.</p>
+<dl class="docutils">
+<dt>attributes:</dt>
+<dd><p class="first">musescore_base:base url for echonest</p>
+<p>spotify_base:base url for spotify</p>
+<p class="last">echonest_base:base url for echonest</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.echonest">
+<span id="echonest-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">echonest</span></code> Module<a class="headerlink" href="#module-apiwrappers.echonest" title="Permalink to this headline">¶</a></h2>
+<p>This module provides wrappers for required echonest api functions.</p>
+<dl class="function">
+<dt id="apiwrappers.echonest.check_analysis_complete">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">check_analysis_complete</code><span class="sig-paren">(</span><em>track_id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.check_analysis_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if analysis of a track is ready on Echonest</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>track_id: track id of target track</dd>
+<dt>Returns:</dt>
+<dd>tuple(json data for the track profile)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.check_file_exists">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">check_file_exists</code><span class="sig-paren">(</span><em>audio_file</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.check_file_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a file already uploaded to Echonest before</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>audio_file:path of the target audio file</dd>
+<dt>Returns:</dt>
+<dd>tuple (json data for the file,True if file already uploaded)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.create_echonest_features">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">create_echonest_features</code><span class="sig-paren">(</span><em>audio_summary</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.create_echonest_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create set of echonest features from audio summary portion of Echonest API results</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>audio_summary:Dictionary of echonest features</dd>
+<dt>Returns:</dt>
+<dd><a class="reference internal" href="#apiwrappers.echonestfeatures.EchonestFeatures" title="apiwrappers.echonestfeatures.EchonestFeatures"><code class="xref py py-class docutils literal"><span class="pre">EchonestFeatures</span></code></a> instance with extracted echonest features</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.extract_artist_from_text">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">extract_artist_from_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.extract_artist_from_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for Echonest&#8217;s extractArtist method.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>text: text to extract artists</dd>
+<dt>Returns:</dt>
+<dd>List of (artist id,artist name)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.get_data_by_md5">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">get_data_by_md5</code><span class="sig-paren">(</span><em>md5</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.get_data_by_md5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Echonest track profile data for the given md5</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>md5: target md5 values</dd>
+<dt>Returns:</dt>
+<dd>Track profile data as dict</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.get_echonest_features_for_local_file">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">get_echonest_features_for_local_file</code><span class="sig-paren">(</span><em>audio_file</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.get_echonest_features_for_local_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get echonest features for a local audio file.</p>
+<p>It first checks if echonest analysis of the file already exists.
+If not audio file is uploaded to Echonest for further analysis</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>audio_file:path of audio file</dd>
+<dt>Returns:</dt>
+<dd><a class="reference internal" href="#apiwrappers.echonestfeatures.EchonestFeatures" title="apiwrappers.echonestfeatures.EchonestFeatures"><code class="xref py py-class docutils literal"><span class="pre">EchonestFeatures</span></code></a> instance with extracted echonest features</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.get_echonest_track_for_file">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">get_echonest_track_for_file</code><span class="sig-paren">(</span><em>audio_file</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.get_echonest_track_for_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uploads an audio file to Echonest for acquiring its analysis later</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>audio_file: Path of audio file</dd>
+<dt>Returns:</dt>
+<dd>track id of uploaded file</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.get_echonestsong_by_spotifyid">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">get_echonestsong_by_spotifyid</code><span class="sig-paren">(</span><em>spotify_id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.get_echonestsong_by_spotifyid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get echonestsong for a given spotify track id</p>
+<p>spotify_id: spotify id of a spotify track</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><p class="first"><a class="reference internal" href="#apiwrappers.echonestsong.EchonestSong" title="apiwrappers.echonestsong.EchonestSong"><code class="xref py py-class docutils literal"><span class="pre">EchonestSong</span></code></a> if a song is found with specified foreign spotify id</p>
+<p class="last">None if no song is found with spotify_id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.get_songs_for_artist">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">get_songs_for_artist</code><span class="sig-paren">(</span><em>artist_id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.get_songs_for_artist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of echonest songs for a given artist_id</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>artist_id: Echonest artist id</dd>
+<dt>Returns:</dt>
+<dd>List of <a class="reference internal" href="#apiwrappers.echonestsong.EchonestSong" title="apiwrappers.echonestsong.EchonestSong"><code class="xref py py-class docutils literal"><span class="pre">EchonestSong</span></code></a></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.parse_echonest_analysisurl">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">parse_echonest_analysisurl</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.parse_echonest_analysisurl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse chroma from echonest analysis url of a track</p>
+<p>url: echonest analysis url</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>12 dimensional chroma matrix</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.echonest.songs_by_artist_id">
+<code class="descclassname">apiwrappers.echonest.</code><code class="descname">songs_by_artist_id</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonest.songs_by_artist_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates list of songs given an artist id</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id: Echonest artist id</dd>
+<dt>Returns:</dt>
+<dd>A list of <a class="reference internal" href="#apiwrappers.echonestsong.EchonestSong" title="apiwrappers.echonestsong.EchonestSong"><code class="xref py py-class docutils literal"><span class="pre">EchonestSong</span></code></a> instances</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.echonestfeatures">
+<span id="echonestfeatures-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">echonestfeatures</span></code> Module<a class="headerlink" href="#module-apiwrappers.echonestfeatures" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apiwrappers.echonestfeatures.EchonestFeatures">
+<em class="property">class </em><code class="descclassname">apiwrappers.echonestfeatures.</code><code class="descname">EchonestFeatures</code><span class="sig-paren">(</span><em>feature_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonestfeatures.EchonestFeatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class represents Echonest Features</p>
+<dl class="docutils">
+<dt>attributes:</dt>
+<dd><p class="first">tempo: Tempo from the echonest analysis</p>
+<p>duration: Duration from the echonest analysis</p>
+<p>timesig: Time signature from the echonest analysis</p>
+<p>key: Key from the echonest analysis</p>
+<p>speechiness: Speechiness from the echonest analysis</p>
+<p class="last">chroma: Chromagram from the echonest analysis</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.echonestsong">
+<span id="echonestsong-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">echonestsong</span></code> Module<a class="headerlink" href="#module-apiwrappers.echonestsong" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apiwrappers.echonestsong.EchonestSong">
+<em class="property">class </em><code class="descclassname">apiwrappers.echonestsong.</code><code class="descname">EchonestSong</code><span class="sig-paren">(</span><em>id</em>, <em>name</em>, <em>preview_url</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.echonestsong.EchonestSong" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apiwrappers.analyzable.Analyzable" title="apiwrappers.analyzable.Analyzable"><code class="xref py py-class docutils literal"><span class="pre">apiwrappers.analyzable.Analyzable</span></code></a></p>
+<p>Class representing an Echonest Song (in very basic way).</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><p class="first">id: id of the Echonest Song.</p>
+<p>name: name of the Echonest Song.</p>
+<p>preview_url: preview_url of the Echonest Song.</p>
+<p class="last">features: <a class="reference internal" href="#apiwrappers.echonestfeatures.EchonestFeatures" title="apiwrappers.echonestfeatures.EchonestFeatures"><code class="xref py py-class docutils literal"><span class="pre">EchonestFeatures</span></code></a> of EchonestSong.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.musescore">
+<span id="musescore-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">musescore</span></code> Module<a class="headerlink" href="#module-apiwrappers.musescore" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="apiwrappers.musescore.create_score">
+<code class="descclassname">apiwrappers.musescore.</code><code class="descname">create_score</code><span class="sig-paren">(</span><em>score_id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.musescore.create_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>create a score for given MuseScore score id</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>score_id: MuseScore id</dd>
+<dt>Returns:</dt>
+<dd><a class="reference internal" href="#apiwrappers.score.Score" title="apiwrappers.score.Score"><code class="xref py py-class docutils literal"><span class="pre">Score</span></code></a> instance</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.musicdatatype">
+<span id="musicdatatype-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">musicdatatype</span></code> Module<a class="headerlink" href="#module-apiwrappers.musicdatatype" title="Permalink to this headline">¶</a></h2>
+<p>Enum class for chroma analysis type</p>
+<div class="line-block">
+<div class="line">0:AUDIO</div>
+<div class="line">1:MIDI</div>
+<div class="line">2:ECHONEST</div>
+</div>
+</div>
+<div class="section" id="module-apiwrappers.score">
+<span id="score-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">score</span></code> Module<a class="headerlink" href="#module-apiwrappers.score" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apiwrappers.score.Score">
+<em class="property">class </em><code class="descclassname">apiwrappers.score.</code><code class="descname">Score</code><span class="sig-paren">(</span><em>id</em>, <em>title</em>, <em>subtitle</em>, <em>composer</em>, <em>mp3</em>, <em>midi</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.score.Score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apiwrappers.analyzable.Analyzable" title="apiwrappers.analyzable.Analyzable"><code class="xref py py-class docutils literal"><span class="pre">apiwrappers.analyzable.Analyzable</span></code></a></p>
+<p>This class represents a MuseScore Score</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><p class="first">id: MuseScore id of the score</p>
+<p>title: title of the score</p>
+<p>subtitle: subtitle of the score</p>
+<p>composer: composer of the score</p>
+<p>mp3: mp3 of the score</p>
+<p>midi: midi of the score</p>
+<p class="last">features: <a class="reference internal" href="#apiwrappers.echonestfeatures.EchonestFeatures" title="apiwrappers.echonestfeatures.EchonestFeatures"><code class="xref py py-class docutils literal"><span class="pre">EchonestFeatures</span></code></a> for the mp3 track of the score uplodaded to Echonest</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="apiwrappers.score.Score.get_artists_from_echonest">
+<code class="descname">get_artists_from_echonest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.score.Score.get_artists_from_echonest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of the artist for the metadata of the score from the echonest extractArtist method</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>list of tuple(artist id, artist name)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="apiwrappers.score.Score.get_chromagram">
+<code class="descname">get_chromagram</code><span class="sig-paren">(</span><em>mode=0</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.score.Score.get_chromagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get chromagram for the score</p>
+<p>Creates chromagram either from mp3,(<a class="reference internal" href="utils.html#utils.get_chromagram_from_audio" title="utils.get_chromagram_from_audio"><code class="xref py py-meth docutils literal"><span class="pre">utils.get_chromagram_from_audio()</span></code></a>) midi (<a class="reference internal" href="utils.html#utils.get_chromagram_from_midi" title="utils.get_chromagram_from_midi"><code class="xref py py-meth docutils literal"><span class="pre">utils.get_chromagram_from_midi()</span></code></a>) or echonest analysis(<a class="reference internal" href="#apiwrappers.echonest.get_echonest_features_for_local_file" title="apiwrappers.echonest.get_echonest_features_for_local_file"><code class="xref py py-meth docutils literal"><span class="pre">apiwrappers.echonest.get_echonest_features_for_local_file()</span></code></a>) of the score</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>mode: <code class="xref py py-class docutils literal"><span class="pre">MusicDataType</span></code>.</dd>
+<dt>Returns:</dt>
+<dd>Chromagram np.array</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="apiwrappers.score.Score.get_queries">
+<code class="descname">get_queries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.score.Score.get_queries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of queries from the metadata of the score for querying audio sources spotify or echonest</p>
+<p>The list of queries are created from title composer and subtitle of the score.
+From lower index to higher of the list strictness of the length and coverage of the query decreases and probability of finding results for the query increases:</p>
+<div class="line-block">
+<div class="line">strictness:query </div>
+<div class="line">0:title + composer + subtitle </div>
+<div class="line">1:title + composer + subtitle with stopwords removed</div>
+<div class="line">2:title + composer</div>
+<div class="line">3:title + composer with stopwords removed</div>
+<div class="line">4:title</div>
+<div class="line">5:title with stopwords removed</div>
+</div>
+<div class="line-block">
+<div class="line">Identical queries with lower strictness removed from the list</div>
+</div>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>list of tuples (query,strictness)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="apiwrappers.score.Score.metadata_match">
+<code class="descname">metadata_match</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.score.Score.metadata_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queries music sources by using the queries of <a class="reference internal" href="#apiwrappers.score.Score.get_queries" title="apiwrappers.score.Score.get_queries"><code class="xref py py-meth docutils literal"><span class="pre">get_queries()</span></code></a> and return a song if its metadata is matching with metadata of the score.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>a <a class="reference internal" href="#apiwrappers.spotifytrack.SpotifyTrack" title="apiwrappers.spotifytrack.SpotifyTrack"><code class="xref py py-class docutils literal"><span class="pre">SpotifyTrack</span></code></a> or <a class="reference internal" href="#apiwrappers.echonestsong.EchonestSong" title="apiwrappers.echonestsong.EchonestSong"><code class="xref py py-class docutils literal"><span class="pre">EchonestSong</span></code></a> if there is a match
+None if there is no match</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.spotify">
+<span id="spotify-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">spotify</span></code> Module<a class="headerlink" href="#module-apiwrappers.spotify" title="Permalink to this headline">¶</a></h2>
+<p>This module provides wrappers for required spotify api functions.</p>
+<dl class="function">
+<dt id="apiwrappers.spotify.create_spotify_track">
+<code class="descclassname">apiwrappers.spotify.</code><code class="descname">create_spotify_track</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotify.create_spotify_track" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a spotify track given an spotify id</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><a class="reference internal" href="#apiwrappers.spotifytrack.SpotifyTrack" title="apiwrappers.spotifytrack.SpotifyTrack"><code class="xref py py-class docutils literal"><span class="pre">SpotifyTrack</span></code></a> instance for given id</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.spotify.get_spotify_uri_by_id">
+<code class="descclassname">apiwrappers.spotify.</code><code class="descname">get_spotify_uri_by_id</code><span class="sig-paren">(</span><em>spotify_id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotify.get_spotify_uri_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get spotify uri for the given spotify id</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>spotify uri</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.spotify.get_top_tracks_for_artist">
+<code class="descclassname">apiwrappers.spotify.</code><code class="descname">get_top_tracks_for_artist</code><span class="sig-paren">(</span><em>artist_id</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotify.get_top_tracks_for_artist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get top tracks given an artist id</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of <a class="reference internal" href="#apiwrappers.spotifytrack.SpotifyTrack" title="apiwrappers.spotifytrack.SpotifyTrack"><code class="xref py py-class docutils literal"><span class="pre">SpotifyTrack</span></code></a></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.spotify.query_spotify">
+<code class="descclassname">apiwrappers.spotify.</code><code class="descname">query_spotify</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotify.query_spotify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query spotify with the given query</p>
+<dl class="docutils">
+<dt>Return:</dt>
+<dd>List of <a class="reference internal" href="#apiwrappers.spotifytrack.SpotifyTrack" title="apiwrappers.spotifytrack.SpotifyTrack"><code class="xref py py-class docutils literal"><span class="pre">SpotifyTrack</span></code></a></dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="apiwrappers.spotify.songs_by_artist_name">
+<code class="descclassname">apiwrappers.spotify.</code><code class="descname">songs_by_artist_name</code><span class="sig-paren">(</span><em>artist</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotify.songs_by_artist_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list of spotify songs given an artist name</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>List of <a class="reference internal" href="#apiwrappers.spotifytrack.SpotifyTrack" title="apiwrappers.spotifytrack.SpotifyTrack"><code class="xref py py-class docutils literal"><span class="pre">SpotifyTrack</span></code></a></dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-apiwrappers.spotifytrack">
+<span id="spotifytrack-module"></span><h2><code class="xref py py-mod docutils literal"><span class="pre">spotifytrack</span></code> Module<a class="headerlink" href="#module-apiwrappers.spotifytrack" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apiwrappers.spotifytrack.SpotifyTrack">
+<em class="property">class </em><code class="descclassname">apiwrappers.spotifytrack.</code><code class="descname">SpotifyTrack</code><span class="sig-paren">(</span><em>id</em>, <em>name</em>, <em>preview_url</em>, <em>uri</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotifytrack.SpotifyTrack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#apiwrappers.analyzable.Analyzable" title="apiwrappers.analyzable.Analyzable"><code class="xref py py-class docutils literal"><span class="pre">apiwrappers.analyzable.Analyzable</span></code></a></p>
+<blockquote>
+<div>This class represents a SpotifyTrack</div></blockquote>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><p class="first">id: Spotify id of the track</p>
+<p>name: name of the spotify track</p>
+<p>preview_url: preview_url of the spotify track</p>
+<p>uri: uri of the spotify track</p>
+<p class="last">features: <a class="reference internal" href="#apiwrappers.echonestfeatures.EchonestFeatures" title="apiwrappers.echonestfeatures.EchonestFeatures"><code class="xref py py-class docutils literal"><span class="pre">EchonestFeatures</span></code></a> for the spotify track</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="apiwrappers.spotifytrack.SpotifyTrack.get_chromagram">
+<code class="descname">get_chromagram</code><span class="sig-paren">(</span><em>mode=0</em><span class="sig-paren">)</span><a class="headerlink" href="#apiwrappers.spotifytrack.SpotifyTrack.get_chromagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get chromagram for the spotify track</p>
+<p>Creates chromagram either from mp3(<a class="reference internal" href="utils.html#utils.get_chromagram_from_audio" title="utils.get_chromagram_from_audio"><code class="xref py py-meth docutils literal"><span class="pre">utils.get_chromagram_from_audio()</span></code></a>) or echonest analysis (<a class="reference internal" href="#apiwrappers.echonest.get_echonestsong_by_spotifyid" title="apiwrappers.echonest.get_echonestsong_by_spotifyid"><code class="xref py py-meth docutils literal"><span class="pre">apiwrappers.echonest.get_echonestsong_by_spotifyid()</span></code></a>) of the spotify track.Chromagram may return None if there is no matching echonest song for the spotify track</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>mode: <code class="xref py py-class docutils literal"><span class="pre">MusicDataType</span></code>. either should be audio or echonest</dd>
+<dt>Returns:</dt>
+<dd>Chromagram representation.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">apiwrappers Package</a><ul>
+<li><a class="reference internal" href="#module-apiwrappers.analyzable"><code class="docutils literal"><span class="pre">analyzable</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.connectionsettings"><code class="docutils literal"><span class="pre">connectionsettings</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.echonest"><code class="docutils literal"><span class="pre">echonest</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.echonestfeatures"><code class="docutils literal"><span class="pre">echonestfeatures</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.echonestsong"><code class="docutils literal"><span class="pre">echonestsong</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.musescore"><code class="docutils literal"><span class="pre">musescore</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.musicdatatype"><code class="docutils literal"><span class="pre">musicdatatype</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.score"><code class="docutils literal"><span class="pre">score</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.spotify"><code class="docutils literal"><span class="pre">spotify</span></code> Module</a></li>
+<li><a class="reference internal" href="#module-apiwrappers.spotifytrack"><code class="docutils literal"><span class="pre">spotifytrack</span></code> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="packages.html"
+                        title="previous chapter">Project Packages</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dtwmatcher.html"
+                        title="next chapter">dtwmatcher Package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/apiwrappers.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dtwmatcher.html" title="dtwmatcher Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="packages.html" title="Project Packages"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Score Matcher 1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="packages.html" >Project Packages</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Serkan Ozer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

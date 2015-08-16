@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Utils module &mdash; Score Matcher 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Score Matcher 1 documentation" href="index.html" />
+    <link rel="prev" title="dtwmatcher Package" href="dtwmatcher.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dtwmatcher.html" title="dtwmatcher Package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Score Matcher 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-utils">
+<span id="utils-module"></span><h1>Utils module<a class="headerlink" href="#module-utils" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="utils.derive_window_size_from_midi">
+<code class="descclassname">utils.</code><code class="descname">derive_window_size_from_midi</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.derive_window_size_from_midi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds best window size for quantizing the midi while creating chromagram from the midi.
+Minimum duration of all the midi note events are found.The midi should not be quantized higher than this duration not to lose information.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file_name: path for the midi file</dd>
+<dt>Returns:</dt>
+<dd>Minimum note duration</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.filter_text">
+<code class="descclassname">utils.</code><code class="descname">filter_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.filter_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter the text by removing some stopwords and some specific tokens:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">text in parenthesis</div>
+<div class="line">years</div>
+<div class="line">stopwords and,or not,by,arranged,music,lyris,arr.,arr,mus, and notated</div>
+</div>
+</div></blockquote>
+<p>BWV 847 arr. by Andres Segovia (1945) (some repetitions are removed from the score) -&gt; BWV 847 Andres Segovia</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_chromagram_from_audio">
+<code class="descclassname">utils.</code><code class="descname">get_chromagram_from_audio</code><span class="sig-paren">(</span><em>file_name</em>, <em>csv_out=''</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_chromagram_from_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a chromagram from the local audio using local vamp chroma extractors</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file_name: path for the audio
+csv_out: records the chroma extractor in this path if given</dd>
+<dt>Returns:</dt>
+<dd>Chromagram for the audio</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_chromagram_from_csv">
+<code class="descclassname">utils.</code><code class="descname">get_chromagram_from_csv</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_chromagram_from_csv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads chromagram from a csv file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.get_chromagram_from_midi">
+<code class="descclassname">utils.</code><code class="descname">get_chromagram_from_midi</code><span class="sig-paren">(</span><em>file_name</em>, <em>csv_out=''</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.get_chromagram_from_midi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a chromagram from the local midi.</p>
+<p>This calculates an artificial chromagram . The midi is quantized into time units. Then for each time unit a vector representing all note classes are created
+and the note classes that are active on that time unit are marked with 1 on the vector. Others left 0.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>file_name: path for the audio
+csv_out: records the chroma extractor in this path if given</dd>
+<dt>Returns:</dt>
+<dd>Chromagram for the audio</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="utils.remove_multi_spaces_from_text">
+<code class="descclassname">utils.</code><code class="descname">remove_multi_spaces_from_text</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#utils.remove_multi_spaces_from_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lorem    ipsum  dolar  -&gt; Lorem Ipsum Dolar</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dtwmatcher.html"
+                        title="previous chapter">dtwmatcher Package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/utils.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dtwmatcher.html" title="dtwmatcher Package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Score Matcher 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Serkan Ozer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
