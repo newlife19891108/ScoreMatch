@@ -30,7 +30,7 @@ ranking = rank_analyzables(score, tracks, 'partial')
 ranking = rank_analyzables(score, tracks, 'full')
 ```
 #Dependencies
-[rpy](http://rpy.sourceforge.net/) and [rdtw](http://dtw.r-forge.r-project.org/)
-[sonic-annotator](http://www.vamp-plugins.org/sonic-annotator/) for partial mode 
-[mido](https://pypi.python.org/pypi/mido/1.1.3)
+[rpy](http://rpy.sourceforge.net/) and [rdtw](http://dtw.r-forge.r-project.org/)  
+[sonic-annotator](http://www.vamp-plugins.org/sonic-annotator/) for partial mode  
+[mido](https://pypi.python.org/pypi/mido/1.1.3)  
 [pyechonest](https://github.com/echonest/pyechonest)
