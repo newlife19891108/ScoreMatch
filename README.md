@@ -1,5 +1,5 @@
 # ScoreMatch
-An implementation for finding the best matching audio for a given score.Full-metadata matching is implemented based on [extractArtist](http://developer.echonest.com/docs/v4/artist.html#extract-beta) method of the Echonest api.Audio matching is also provided:Dynamic time warping based on chroma feature sequences are used for the matching.MuseScore api used for the scores. Echonest and Spotify APIs are used for extracting and examining audio sources
+An implementation for finding the best matching audio for a given score.It provides metadata matching and audio matching seperately.Full-metadata matching is implemented based on [extractArtist](http://developer.echonest.com/docs/v4/artist.html#extract-beta) method of the Echonest api.Audio matching is done based on dynamic time warping with chroma feature sequences.MuseScore API is used for the scores. Echonest and Spotify APIs are used for extracting and examining audio sources
 #Usage
 First create score based on a MuseScore score id
 ```python
@@ -29,3 +29,8 @@ The algorithm has two modes as full and partial.In full mode, chroma sequence of
 ranking = rank_analyzables(score, tracks, 'partial')
 ranking = rank_analyzables(score, tracks, 'full')
 ```
+#Dependencies
+[rpy](http://rpy.sourceforge.net/) and [rdtw](http://dtw.r-forge.r-project.org/)
+[sonic-annotator](http://www.vamp-plugins.org/sonic-annotator/) for partial mode 
+[mido](https://pypi.python.org/pypi/mido/1.1.3)
+[pyechonest](https://github.com/echonest/pyechonest)
