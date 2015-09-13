@@ -6,9 +6,9 @@ import abc
 
 class Analyzable(object):
 
-    """This is an abstracted class for other audio related instances.
+    """This is an abstracted class for other audio related classes.
 
-    The subclasses of this have to have a function which returns a chromagram.
+    Its subclasses have to have a function which returns a chromagram.
 
     Attributes:
         id: id of the analyzable.Can be spotify,echonest or musescore id depending on the subclass inheriting it.

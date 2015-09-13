@@ -26,6 +26,7 @@ def create_score(score_id):
     metadata = data['metadata']
     title = metadata['title']
     composer = metadata['composer']
+    poet = metadata['poet']
     subtitle = metadata['subtitle']
     mp3 = 'http://static.musescore.com/' + score_id + '/' + secret \
         + '/score.mp3'
@@ -37,6 +38,7 @@ def create_score(score_id):
         title,
         subtitle,
         composer,
+        poet,
         mp3,
         midi,
         )

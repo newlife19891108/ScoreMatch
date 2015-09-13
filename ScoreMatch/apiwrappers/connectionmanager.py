@@ -1,4 +1,4 @@
-#!/usr/bin/python
+    #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 """This module provides helpers for API calls.
@@ -11,7 +11,9 @@ import singleton
 import json
 import requests
 import httplib
+import socket
 
+socket.setdefaulttimeout(90)
 class CheckInformation(object):
     """
         This class represent a check information for an api call.
@@ -63,7 +65,7 @@ class ConnectionManager(object):
             wait_text: Text to print
             wait_amount: Number of seconds to wait
         """
-        print wait_text, wait_amount, 'secs'
+        print "wait for", wait_amount, 'secs'
         time.sleep(wait_amount)
 
     def need_to_wait(self, data, check_information_list):
@@ -88,17 +90,32 @@ class ConnectionManager(object):
         params={},
         check_information=None,
         ):
+        if isinstance(params,dict):
+            for k, v in params.iteritems():
+                params[k] = unicode(v).encode('utf-8')
         params = urllib.urlencode(params)
         url = urllib.quote(url + params, safe="%/:=&?~#+!$,;'@()*[]")
         print url
-        with contextlib.closing(urllib.urlopen(url)) as response:
-            data = json.loads(response.read())
-            if check_information:
-                while self.need_to_wait(data, check_information):
-                    with contextlib.closing(urllib.urlopen(url)) as \
-                        nested_response:
-                        data = json.loads(nested_response.read())
-            return data
+        #   print url
+        while True:
+            try:
+                with contextlib.closing(urllib.urlopen(url)) as response:
+                    try:
+                        data = json.loads(response.read())
+                    except ValueError:
+                        return None
+                    if check_information:
+                        while self.need_to_wait(data, check_information):
+                            with contextlib.closing(urllib.urlopen(url)) as \
+                                nested_response:
+                                try:
+                                    data = json.loads(nested_response.read())
+                                except ValueError:
+                                    return None
+                    return data
+            except socket.timeout:
+                continue
+
 
     def post_data(
         self,
@@ -119,10 +136,10 @@ class ConnectionManager(object):
                             headers={'Content-Type': 'application/octet-stream'
                             })
         data = res.json()
-        if check_information:
-            while self.need_to_wait(data, check_information):
-                res = requests.post(url=url, data=file_data,
-                                    headers={'Content-Type': 'application/octet-stream'
-                                    })
-                data = res.json()
+        # if check_information:
+        #     while self.need_to_wait(data, check_information):
+        #         res = requests.post(url=url, data=file_data,
+        #                             headers={'Content-Type': 'application/octet-stream'
+        #                             })
+        #         data = res.json()
         return data

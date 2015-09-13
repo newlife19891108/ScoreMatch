@@ -4,7 +4,7 @@
 import urllib
 from analyzable import *
 import utils
-
+from musicdatatype import MusicDataType
 class EchonestSong(Analyzable):
     """Class representing an Echonest Song (in very basic way).
 
@@ -21,24 +21,30 @@ class EchonestSong(Analyzable):
         self,
         id,
         name,
-        preview_url,
+        preview_url,artist
         ):
 
         Analyzable.__init__(self, id)
         self.preview_url = preview_url
-        self.name = name.encode('utf-8')
+        self.name = name
         self.type = 'echonest'
-
-    def get_chromagram(self):
+        self.artist = artist
+        self.analysis_url = None
+    def get_chromagram(self,mode=MusicDataType.AUDIO):
 
         directory = os.path.dirname(os.path.abspath(__file__))
-        audio_file_path = directory + '/' + self.id + '.mp3'
-        print "score is being downloaded"
-        utils.download_file(self.preview_url, audio_file_path)
-        print "file downloaded"
-        chromagram = get_chromagram_from_audio(audio_file_path)
-        utils.remove_file(audio_file_path)
-        return chromagram
+        if mode == MusicDataType.AUDIO:
+            audio_file_path = directory + '/' + self.id + '.mp3'
+            utils.download_file(self.preview_url, audio_file_path)
+            chromagram = utils.get_chromagram_from_audio(audio_file_path)
+            utils.remove_file(audio_file_path)
+            return chromagram
+        elif mode == MusicDataType.ECHONEST:
+            if  self.features:
+                return self.features.chroma
+            else:
+                print "No echonest song found for:"+self.id
+        return None
 
     def set_features(self, features):
         self.features = features

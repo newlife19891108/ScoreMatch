@@ -27,18 +27,42 @@ def songs_by_artist_name(artist):
         List of :class:`.SpotifyTrack`
     """
     base_url = spotify_base + 'search?'
-    params = {'q': artist.encode('utf-8'), 'type': 'artist'}
+    params = {'q': artist, 'type': 'artist'}
     data = ConnectionManager().get_data(base_url, params)
     artists = data['artists']['items']
     artist_id = None
     for item in artists:
         artist_name = item['name']
-        if artist_name.encode('utf-8').lower() == artist.lower():
+        if artist_name.lower() == artist.lower():
             artist_id = item['id']
             return get_top_tracks_for_artist(artist_id)
     return []
-
-
+def songs_by_artist_name2(artist):
+    base_url = spotify_base + 'search?'
+    params = {'q': artist, 'type': 'artist'}
+    data = ConnectionManager().get_data(base_url, params)
+    artists = data['artists']['items']
+    artist_id = None
+    markets = ['TR','ES','US']
+    tracks = []
+    for item in artists:
+        artist_name = item['name']
+        if artist_name.lower() == artist.lower():
+            for market in markets:
+                tracks.extend(get_songs_by_market(artist_name,market))
+            return tracks
+    return []
+def get_songs_by_market(artist,market):
+ 
+    base_url = spotify_base + 'search?'
+    params = {'q': artist, 'type': 'track', 'market':market,'limit': '20'}
+    data = ConnectionManager().get_data(base_url, params)
+    tracks = data['tracks']['items']
+    track_names = []
+    for track in tracks:
+        spotify_track = parse_spotify_track(track)
+        track_names.append(spotify_track)
+    return track_names
 def get_top_tracks_for_artist(artist_id):
     """Get top tracks given an artist id
 
@@ -63,18 +87,25 @@ def query_spotify(query):
     Return:
         List of :class:`.SpotifyTrack`
     """
+    if query == '':
+        return []
     base_url = spotify_base + 'search?'
-    params = {'q': query, 'type': 'track', 'limit': 50}
+    params = {'q': query, 'type': 'track', 'limit': '50'}
     data = ConnectionManager().get_data(base_url, params)
     tracks = data['tracks']['items']
     track_names = []
+    track_names_sub = []
     for track in tracks:
         spotify_track = parse_spotify_track(track)
-
-        track_names.append(spotify_track)
-    print len(track_names), 'found for', query
-    return track_names
-
+        if utils.num_common_words(spotify_track.name,query)>0:
+            track_names.append(spotify_track)
+        track_names_sub.append(spotify_track)
+    if len(track_names)>0:
+        print len(track_names), 'found for', query.encode('utf-8')
+        return track_names
+    else:
+        print len(track_names_sub), 'found for', query.encode('utf-8')
+        return track_names_sub      
 
 def parse_spotify_track(data):
     track_id = data['id']
@@ -84,7 +115,8 @@ def parse_spotify_track(data):
         preview_url = ''
     name = data['name']
     uri = data['uri']
-    return SpotifyTrack(track_id, name, preview_url, uri)
+    artist = data['artists'][0]['name']
+    return SpotifyTrack(track_id, name, preview_url, uri,artist)
 
 
 def create_spotify_track(id):

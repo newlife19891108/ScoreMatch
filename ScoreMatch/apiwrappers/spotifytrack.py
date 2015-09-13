@@ -5,6 +5,7 @@ from analyzable import *
 import utils
 from musicdatatype import MusicDataType
 import os
+import numpy as np
 from echonest import get_echonestsong_by_spotifyid
 class SpotifyTrack(Analyzable):
     """
@@ -26,7 +27,7 @@ class SpotifyTrack(Analyzable):
         id,
         name,
         preview_url,
-        uri,
+        uri,artist
         ):
 
         Analyzable.__init__(self, id)
@@ -34,6 +35,7 @@ class SpotifyTrack(Analyzable):
         self.name = name
         self.type = 'spotify'
         self.uri = uri
+        self.artist = artist
 
     def get_chromagram(self, mode=MusicDataType.AUDIO):
         """
@@ -51,12 +53,14 @@ class SpotifyTrack(Analyzable):
         if mode == MusicDataType.AUDIO:
             audio_file_path = directory + '/' + self.id + '.mp3'
             utils.download_file(self.preview_url, audio_file_path)
-            chromagram = get_chromagram_from_audio(audio_file_path)
-            remove_file(audio_file_path)
+            chromagram = utils.get_chromagram_from_audio(audio_file_path)
+            utils.remove_file(audio_file_path)
             return chromagram
         elif mode == MusicDataType.ECHONEST:
             e = get_echonestsong_by_spotifyid(self.id)
             if e:
                 self.echonest_features = e.features
                 return e.features.chroma
+            else:
+                print "No echonest song found for spotify:track:"+self.id
         return None
